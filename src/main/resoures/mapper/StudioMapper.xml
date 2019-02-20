@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdpi.maker.mapper.StudioMapper" >
+  <resultMap id="BaseResultMap" type="com.gdpi.maker.pojo.Studio" >
+    <id column="stu_id" property="stuId" jdbcType="VARCHAR" />
+    <result column="dev_id" property="devId" jdbcType="VARCHAR" />
+    <result column="stu_name" property="stuName" jdbcType="VARCHAR" />
+    <result column="stu_registime" property="stuRegistime" jdbcType="TIMESTAMP" />
+    <result column="stu_img" property="stuImg" jdbcType="VARCHAR" />
+    <result column="stu_phone" property="stuPhone" jdbcType="CHAR" />
+    <result column="stu_email" property="stuEmail" jdbcType="VARCHAR" />
+    <result column="stu_location" property="stuLocation" jdbcType="VARCHAR" />
+    <result column="stu_speciality" property="stuSpeciality" jdbcType="VARCHAR" />
+    <result column="stu_endtime" property="stuEndtime" jdbcType="TIMESTAMP" />
+    <result column="stu_start" property="stuStart" jdbcType="INTEGER" />
+    <result column="stu_praise" property="stuPraise" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gdpi.maker.pojo.Studio" extends="BaseResultMap" >
+    <result column="stu_info" property="stuInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stu_id, dev_id, stu_name, stu_registime, stu_img, stu_phone, stu_email, stu_location,
+    stu_speciality, stu_endtime, stu_start, stu_praise
+  </sql>
+  <sql id="Blob_Column_List" >
+    stu_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.StudioExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from studio
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdpi.maker.pojo.StudioExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from studio
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from studio
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from studio
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdpi.maker.pojo.StudioExample" >
+    delete from studio
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdpi.maker.pojo.Studio" >
+    insert into studio (stu_id, dev_id, stu_name,
+      stu_registime, stu_img, stu_phone,
+      stu_email, stu_location, stu_speciality,
+      stu_endtime, stu_start, stu_praise,
+      stu_info)
+    values (#{stuId,jdbcType=VARCHAR}, #{devId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR},
+      #{stuRegistime,jdbcType=TIMESTAMP}, #{stuImg,jdbcType=VARCHAR}, #{stuPhone,jdbcType=CHAR},
+      #{stuEmail,jdbcType=VARCHAR}, #{stuLocation,jdbcType=VARCHAR}, #{stuSpeciality,jdbcType=VARCHAR},
+      #{stuEndtime,jdbcType=TIMESTAMP}, #{stuStart,jdbcType=INTEGER}, #{stuPraise,jdbcType=INTEGER},
+      #{stuInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdpi.maker.pojo.Studio" >
+    insert into studio
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        stu_id,
+      </if>
+      <if test="devId != null" >
+        dev_id,
+      </if>
+      <if test="stuName != null" >
+        stu_name,
+      </if>
+      <if test="stuRegistime != null" >
+        stu_registime,
+      </if>
+      <if test="stuImg != null" >
+        stu_img,
+      </if>
+      <if test="stuPhone != null" >
+        stu_phone,
+      </if>
+      <if test="stuEmail != null" >
+        stu_email,
+      </if>
+      <if test="stuLocation != null" >
+        stu_location,
+      </if>
+      <if test="stuSpeciality != null" >
+        stu_speciality,
+      </if>
+      <if test="stuEndtime != null" >
+        stu_endtime,
+      </if>
+      <if test="stuStart != null" >
+        stu_start,
+      </if>
+      <if test="stuPraise != null" >
+        stu_praise,
+      </if>
+      <if test="stuInfo != null" >
+        stu_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        #{stuId,jdbcType=VARCHAR},
+      </if>
+      <if test="devId != null" >
+        #{devId,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null" >
+        #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuRegistime != null" >
+        #{stuRegistime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuImg != null" >
+        #{stuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="stuPhone != null" >
+        #{stuPhone,jdbcType=CHAR},
+      </if>
+      <if test="stuEmail != null" >
+        #{stuEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="stuLocation != null" >
+        #{stuLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="stuSpeciality != null" >
+        #{stuSpeciality,jdbcType=VARCHAR},
+      </if>
+      <if test="stuEndtime != null" >
+        #{stuEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuStart != null" >
+        #{stuStart,jdbcType=INTEGER},
+      </if>
+      <if test="stuPraise != null" >
+        #{stuPraise,jdbcType=INTEGER},
+      </if>
+      <if test="stuInfo != null" >
+        #{stuInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdpi.maker.pojo.StudioExample" resultType="java.lang.Integer" >
+    select count(*) from studio
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update studio
+    <set >
+      <if test="record.stuId != null" >
+        stu_id = #{record.stuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devId != null" >
+        dev_id = #{record.devId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuName != null" >
+        stu_name = #{record.stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuRegistime != null" >
+        stu_registime = #{record.stuRegistime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stuImg != null" >
+        stu_img = #{record.stuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuPhone != null" >
+        stu_phone = #{record.stuPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.stuEmail != null" >
+        stu_email = #{record.stuEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuLocation != null" >
+        stu_location = #{record.stuLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuSpeciality != null" >
+        stu_speciality = #{record.stuSpeciality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuEndtime != null" >
+        stu_endtime = #{record.stuEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stuStart != null" >
+        stu_start = #{record.stuStart,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuPraise != null" >
+        stu_praise = #{record.stuPraise,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuInfo != null" >
+        stu_info = #{record.stuInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update studio
+    set stu_id = #{record.stuId,jdbcType=VARCHAR},
+    dev_id = #{record.devId,jdbcType=VARCHAR},
+    stu_name = #{record.stuName,jdbcType=VARCHAR},
+    stu_registime = #{record.stuRegistime,jdbcType=TIMESTAMP},
+    stu_img = #{record.stuImg,jdbcType=VARCHAR},
+    stu_phone = #{record.stuPhone,jdbcType=CHAR},
+    stu_email = #{record.stuEmail,jdbcType=VARCHAR},
+    stu_location = #{record.stuLocation,jdbcType=VARCHAR},
+    stu_speciality = #{record.stuSpeciality,jdbcType=VARCHAR},
+    stu_endtime = #{record.stuEndtime,jdbcType=TIMESTAMP},
+    stu_start = #{record.stuStart,jdbcType=INTEGER},
+    stu_praise = #{record.stuPraise,jdbcType=INTEGER},
+    stu_info = #{record.stuInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update studio
+    set stu_id = #{record.stuId,jdbcType=VARCHAR},
+    dev_id = #{record.devId,jdbcType=VARCHAR},
+    stu_name = #{record.stuName,jdbcType=VARCHAR},
+    stu_registime = #{record.stuRegistime,jdbcType=TIMESTAMP},
+    stu_img = #{record.stuImg,jdbcType=VARCHAR},
+    stu_phone = #{record.stuPhone,jdbcType=CHAR},
+    stu_email = #{record.stuEmail,jdbcType=VARCHAR},
+    stu_location = #{record.stuLocation,jdbcType=VARCHAR},
+    stu_speciality = #{record.stuSpeciality,jdbcType=VARCHAR},
+    stu_endtime = #{record.stuEndtime,jdbcType=TIMESTAMP},
+    stu_start = #{record.stuStart,jdbcType=INTEGER},
+    stu_praise = #{record.stuPraise,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdpi.maker.pojo.Studio" >
+    update studio
+    <set >
+      <if test="devId != null" >
+        dev_id = #{devId,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null" >
+        stu_name = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuRegistime != null" >
+        stu_registime = #{stuRegistime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuImg != null" >
+        stu_img = #{stuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="stuPhone != null" >
+        stu_phone = #{stuPhone,jdbcType=CHAR},
+      </if>
+      <if test="stuEmail != null" >
+        stu_email = #{stuEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="stuLocation != null" >
+        stu_location = #{stuLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="stuSpeciality != null" >
+        stu_speciality = #{stuSpeciality,jdbcType=VARCHAR},
+      </if>
+      <if test="stuEndtime != null" >
+        stu_endtime = #{stuEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuStart != null" >
+        stu_start = #{stuStart,jdbcType=INTEGER},
+      </if>
+      <if test="stuPraise != null" >
+        stu_praise = #{stuPraise,jdbcType=INTEGER},
+      </if>
+      <if test="stuInfo != null" >
+        stu_info = #{stuInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gdpi.maker.pojo.Studio" >
+    update studio
+    set dev_id = #{devId,jdbcType=VARCHAR},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      stu_registime = #{stuRegistime,jdbcType=TIMESTAMP},
+      stu_img = #{stuImg,jdbcType=VARCHAR},
+      stu_phone = #{stuPhone,jdbcType=CHAR},
+      stu_email = #{stuEmail,jdbcType=VARCHAR},
+      stu_location = #{stuLocation,jdbcType=VARCHAR},
+      stu_speciality = #{stuSpeciality,jdbcType=VARCHAR},
+      stu_endtime = #{stuEndtime,jdbcType=TIMESTAMP},
+      stu_start = #{stuStart,jdbcType=INTEGER},
+      stu_praise = #{stuPraise,jdbcType=INTEGER},
+      stu_info = #{stuInfo,jdbcType=LONGVARCHAR}
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdpi.maker.pojo.Studio" >
+    update studio
+    set dev_id = #{devId,jdbcType=VARCHAR},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      stu_registime = #{stuRegistime,jdbcType=TIMESTAMP},
+      stu_img = #{stuImg,jdbcType=VARCHAR},
+      stu_phone = #{stuPhone,jdbcType=CHAR},
+      stu_email = #{stuEmail,jdbcType=VARCHAR},
+      stu_location = #{stuLocation,jdbcType=VARCHAR},
+      stu_speciality = #{stuSpeciality,jdbcType=VARCHAR},
+      stu_endtime = #{stuEndtime,jdbcType=TIMESTAMP},
+      stu_start = #{stuStart,jdbcType=INTEGER},
+      stu_praise = #{stuPraise,jdbcType=INTEGER}
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- <<<<<<<<<<<<<<<<<<<<< 自己写的 >>>>>>>>>>>>>>> -->
+  <select id="selectStuByIdExist" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from studio
+    where 
+    	stu_id = #{stuId,jdbcType=VARCHAR}
+    	and stu_start = 1
+  </select>
+  
+  <select id="selectOneStudio" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.Studio" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from studio 1=1
+      <if test="stuId != null" >
+        and stu_id = #{stuId,jdbcType=VARCHAR}
+      </if>
+      <if test="devId != null" >
+        and dev_id = #{devId,jdbcType=VARCHAR}
+      </if>
+      <if test="stuName != null" >
+        and stu_name = #{stuName,jdbcType=VARCHAR}
+      </if>
+      <if test="stuRegistime != null" >
+        and stu_registime = #{stuRegistime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="stuImg != null" >
+        and stu_img = #{stuImg,jdbcType=VARCHAR}
+      </if>
+      <if test="stuPhone != null" >
+        and stu_phone = #{stuPhone,jdbcType=CHAR}
+      </if>
+      <if test="stuEmail != null" >
+        and stu_email = #{stuEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="stuLocation != null" >
+        and stu_location = #{stuLocation,jdbcType=VARCHAR}
+      </if>
+      <if test="stuSpeciality != null" >
+        and stu_speciality = #{stuSpeciality,jdbcType=VARCHAR}
+      </if>
+      <if test="stuEndtime != null" >
+        and stu_endtime = #{stuEndtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="stuStart != null" >
+        and stu_start = #{stuStart,jdbcType=INTEGER}
+      </if>
+      <if test="stuInfo != null" >
+        and stu_info = #{stuInfo,jdbcType=LONGVARCHAR}
+      </if>
+  </select>
+</mapper>

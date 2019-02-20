@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdpi.maker.mapper.PositionMapper" >
+  <resultMap id="BaseResultMap" type="com.gdpi.maker.pojo.Position" >
+    <id column="position_id" property="positionId" jdbcType="VARCHAR" />
+    <result column="position_name" property="positionName" jdbcType="VARCHAR" />
+    <result column="positionmem_id" property="positionmemId" jdbcType="VARCHAR" />
+    <result column="position_reltime" property="positionReltime" jdbcType="TIMESTAMP" />
+    <result column="position_endtime" property="positionEndtime" jdbcType="TIMESTAMP" />
+    <result column="position_amount" property="positionAmount" jdbcType="INTEGER" />
+    <result column="position_heat" property="positionHeat" jdbcType="VARCHAR" />
+    <result column="position_state" property="positionState" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gdpi.maker.pojo.Position" extends="BaseResultMap" >
+    <result column="position_info" property="positionInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    position_id, position_name, positionmem_id, position_reltime, position_endtime, position_amount, 
+    position_heat, position_state
+  </sql>
+  <sql id="Blob_Column_List" >
+    position_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.PositionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdpi.maker.pojo.PositionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from position
+    where position_id = #{positionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from position
+    where position_id = #{positionId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdpi.maker.pojo.PositionExample" >
+    delete from position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdpi.maker.pojo.Position" >
+    insert into position (position_id, position_name, positionmem_id, 
+      position_reltime, position_endtime, position_amount, 
+      position_heat, position_state, position_info
+      )
+    values (#{positionId,jdbcType=VARCHAR}, #{positionName,jdbcType=VARCHAR}, #{positionmemId,jdbcType=VARCHAR}, 
+      #{positionReltime,jdbcType=TIMESTAMP}, #{positionEndtime,jdbcType=TIMESTAMP}, #{positionAmount,jdbcType=INTEGER}, 
+      #{positionHeat,jdbcType=VARCHAR}, #{positionState,jdbcType=INTEGER}, #{positionInfo,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdpi.maker.pojo.Position" >
+    insert into position
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="positionId != null" >
+        position_id,
+      </if>
+      <if test="positionName != null" >
+        position_name,
+      </if>
+      <if test="positionmemId != null" >
+        positionmem_id,
+      </if>
+      <if test="positionReltime != null" >
+        position_reltime,
+      </if>
+      <if test="positionEndtime != null" >
+        position_endtime,
+      </if>
+      <if test="positionAmount != null" >
+        position_amount,
+      </if>
+      <if test="positionHeat != null" >
+        position_heat,
+      </if>
+      <if test="positionState != null" >
+        position_state,
+      </if>
+      <if test="positionInfo != null" >
+        position_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="positionId != null" >
+        #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionName != null" >
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionmemId != null" >
+        #{positionmemId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionReltime != null" >
+        #{positionReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionEndtime != null" >
+        #{positionEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionAmount != null" >
+        #{positionAmount,jdbcType=INTEGER},
+      </if>
+      <if test="positionHeat != null" >
+        #{positionHeat,jdbcType=VARCHAR},
+      </if>
+      <if test="positionState != null" >
+        #{positionState,jdbcType=INTEGER},
+      </if>
+      <if test="positionInfo != null" >
+        #{positionInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdpi.maker.pojo.PositionExample" resultType="java.lang.Integer" >
+    select count(*) from position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update position
+    <set >
+      <if test="record.positionId != null" >
+        position_id = #{record.positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionName != null" >
+        position_name = #{record.positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionmemId != null" >
+        positionmem_id = #{record.positionmemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionReltime != null" >
+        position_reltime = #{record.positionReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.positionEndtime != null" >
+        position_endtime = #{record.positionEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.positionAmount != null" >
+        position_amount = #{record.positionAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionHeat != null" >
+        position_heat = #{record.positionHeat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionState != null" >
+        position_state = #{record.positionState,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionInfo != null" >
+        position_info = #{record.positionInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update position
+    set position_id = #{record.positionId,jdbcType=VARCHAR},
+    position_name = #{record.positionName,jdbcType=VARCHAR},
+    positionmem_id = #{record.positionmemId,jdbcType=VARCHAR},
+    position_reltime = #{record.positionReltime,jdbcType=TIMESTAMP},
+    position_endtime = #{record.positionEndtime,jdbcType=TIMESTAMP},
+    position_amount = #{record.positionAmount,jdbcType=INTEGER},
+    position_heat = #{record.positionHeat,jdbcType=VARCHAR},
+    position_state = #{record.positionState,jdbcType=INTEGER},
+    position_info = #{record.positionInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update position
+    set position_id = #{record.positionId,jdbcType=VARCHAR},
+    position_name = #{record.positionName,jdbcType=VARCHAR},
+    positionmem_id = #{record.positionmemId,jdbcType=VARCHAR},
+    position_reltime = #{record.positionReltime,jdbcType=TIMESTAMP},
+    position_endtime = #{record.positionEndtime,jdbcType=TIMESTAMP},
+    position_amount = #{record.positionAmount,jdbcType=INTEGER},
+    position_heat = #{record.positionHeat,jdbcType=VARCHAR},
+    position_state = #{record.positionState,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdpi.maker.pojo.Position" >
+    update position
+    <set >
+      <if test="positionName != null" >
+        position_name = #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionmemId != null" >
+        positionmem_id = #{positionmemId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionReltime != null" >
+        position_reltime = #{positionReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionEndtime != null" >
+        position_endtime = #{positionEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionAmount != null" >
+        position_amount = #{positionAmount,jdbcType=INTEGER},
+      </if>
+      <if test="positionHeat != null" >
+        position_heat = #{positionHeat,jdbcType=VARCHAR},
+      </if>
+      <if test="positionState != null" >
+        position_state = #{positionState,jdbcType=INTEGER},
+      </if>
+      <if test="positionInfo != null" >
+        position_info = #{positionInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where position_id = #{positionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gdpi.maker.pojo.Position" >
+    update position
+    set position_name = #{positionName,jdbcType=VARCHAR},
+      positionmem_id = #{positionmemId,jdbcType=VARCHAR},
+      position_reltime = #{positionReltime,jdbcType=TIMESTAMP},
+      position_endtime = #{positionEndtime,jdbcType=TIMESTAMP},
+      position_amount = #{positionAmount,jdbcType=INTEGER},
+      position_heat = #{positionHeat,jdbcType=VARCHAR},
+      position_state = #{positionState,jdbcType=INTEGER},
+      position_info = #{positionInfo,jdbcType=LONGVARCHAR}
+    where position_id = #{positionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdpi.maker.pojo.Position" >
+    update position
+    set position_name = #{positionName,jdbcType=VARCHAR},
+      positionmem_id = #{positionmemId,jdbcType=VARCHAR},
+      position_reltime = #{positionReltime,jdbcType=TIMESTAMP},
+      position_endtime = #{positionEndtime,jdbcType=TIMESTAMP},
+      position_amount = #{positionAmount,jdbcType=INTEGER},
+      position_heat = #{positionHeat,jdbcType=VARCHAR},
+      position_state = #{positionState,jdbcType=INTEGER}
+    where position_id = #{positionId,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- <<<<<<<<<<<<<<<<<< 自己写的 >>>>>>>>>>>>>>>>>>>>> -->
+  <select id="selectOnePosition" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.Position" >
+    select
+    <include refid="Base_Column_List" />
+    from position
+    where 1=1
+      <if test="positionId != null" >
+        and position_id = #{positionId,jdbcType=VARCHAR}
+      </if>
+      <if test="positionName != null" >
+        and position_name = #{positionName,jdbcType=VARCHAR}
+      </if>
+      <if test="positionmemId != null" >
+        and positionmem_id = #{positionmemId,jdbcType=VARCHAR}
+      </if>
+      <if test="positionReltime != null" >
+        and position_reltime = #{positionReltime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="positionEndtime != null" >
+        and position_endtime = #{positionEndtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="positionAmount != null" >
+        and position_amount = #{positionAmount,jdbcType=INTEGER}
+      </if>
+      <if test="positionHeat != null" >
+        and position_heat = #{positionHeat,jdbcType=VARCHAR}
+      </if>
+      <if test="positionState != null" >
+        and position_state = #{positionState,jdbcType=INTEGER}
+      </if>
+      <if test="positionInfo != null" >
+        and position_info = #{positionInfo,jdbcType=LONGVARCHAR}
+      </if>
+  </select>
+  
+  <select id="selectPosByIdExist" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from position
+    where 
+      	position_id = #{positionId,jdbcType=VARCHAR}
+        and
+        position_state = 2
+  </select>
+</mapper>

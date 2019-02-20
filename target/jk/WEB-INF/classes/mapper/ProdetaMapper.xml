@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdpi.maker.mapper.ProdetaMapper" >
+  <resultMap id="BaseResultMap" type="com.gdpi.maker.pojo.Prodeta" >
+    <result column="pro_id" property="proId" jdbcType="VARCHAR" />
+    <result column="prde_iswin" property="prdeIswin" jdbcType="VARCHAR" />
+    <result column="prde_rectime" property="prdeRectime" jdbcType="TIMESTAMP" />
+    <result column="prde_comtime" property="prdeComtime" jdbcType="TIMESTAMP" />
+    <result column="prde_state" property="prdeState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pro_id, prde_iswin, prde_rectime, prde_comtime, prde_state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdpi.maker.pojo.ProdetaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prodeta
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.gdpi.maker.pojo.ProdetaExample" >
+    delete from prodeta
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdpi.maker.pojo.Prodeta" >
+    insert into prodeta (pro_id, prde_iswin, prde_rectime, 
+      prde_comtime, prde_state)
+    values (#{proId,jdbcType=VARCHAR}, #{prdeIswin,jdbcType=VARCHAR}, #{prdeRectime,jdbcType=TIMESTAMP}, 
+      #{prdeComtime,jdbcType=TIMESTAMP}, #{prdeState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdpi.maker.pojo.Prodeta" >
+    insert into prodeta
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="prdeIswin != null" >
+        prde_iswin,
+      </if>
+      <if test="prdeRectime != null" >
+        prde_rectime,
+      </if>
+      <if test="prdeComtime != null" >
+        prde_comtime,
+      </if>
+      <if test="prdeState != null" >
+        prde_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        #{proId,jdbcType=VARCHAR},
+      </if>
+      <if test="prdeIswin != null" >
+        #{prdeIswin,jdbcType=VARCHAR},
+      </if>
+      <if test="prdeRectime != null" >
+        #{prdeRectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prdeComtime != null" >
+        #{prdeComtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prdeState != null" >
+        #{prdeState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdpi.maker.pojo.ProdetaExample" resultType="java.lang.Integer" >
+    select count(*) from prodeta
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update prodeta
+    <set >
+      <if test="record.proId != null" >
+        pro_id = #{record.proId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdeIswin != null" >
+        prde_iswin = #{record.prdeIswin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdeRectime != null" >
+        prde_rectime = #{record.prdeRectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prdeComtime != null" >
+        prde_comtime = #{record.prdeComtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prdeState != null" >
+        prde_state = #{record.prdeState,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update prodeta
+    set pro_id = #{record.proId,jdbcType=VARCHAR},
+    prde_iswin = #{record.prdeIswin,jdbcType=VARCHAR},
+    prde_rectime = #{record.prdeRectime,jdbcType=TIMESTAMP},
+    prde_comtime = #{record.prdeComtime,jdbcType=TIMESTAMP},
+    prde_state = #{record.prdeState,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <!-- <<<<<<<<<<<<<< 自己写的 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+  <select id="selectOneProdeta" resultMap="BaseResultMap" parameterType="com.gdpi.maker.pojo.Prodeta" >
+    select
+    <include refid="Base_Column_List" />
+    from prodeta
+    where 1=1
+      <if test="record.proId != null" >
+        and pro_id = #{record.proId,jdbcType=VARCHAR}
+      </if>
+      <if test="record.prdeIswin != null" >
+        and prde_iswin = #{record.prdeIswin,jdbcType=VARCHAR}
+      </if>
+      <if test="record.prdeRectime != null" >
+        and prde_rectime = #{record.prdeRectime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="record.prdeComtime != null" >
+        and prde_comtime = #{record.prdeComtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="record.prdeState != null" >
+        and prde_state = #{record.prdeState,jdbcType=INTEGER}
+      </if>
+  </select>
+</mapper>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdpi.maker.mapper.PositionmemMapper" >
+  <resultMap id="BaseResultMap" type="com.gdpi.maker.pojo.Positionmem" >
+    <result column="position_id" property="positionId" jdbcType="VARCHAR" />
+    <result column="positionmem_id" property="positionmemId" jdbcType="VARCHAR" />
+    <result column="positionmem_time" property="positionmemTime" jdbcType="TIMESTAMP" />
+    <result column="positionmem_state" property="positionmemState" jdbcType="INTEGER" />
+    <result column="positionmen_reltime" property="positionmenReltime" jdbcType="TIMESTAMP" />
+    <result column="positionmen_endime" property="positionmenEndime" jdbcType="TIMESTAMP" />
+    <result column="positionmen_sum" property="positionmenSum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    position_id, positionmem_id, positionmem_time, positionmem_state, positionmen_reltime,
+    positionmen_endime, positionmen_sum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdpi.maker.pojo.PositionmemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from positionmem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.gdpi.maker.pojo.PositionmemExample" >
+    delete from positionmem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdpi.maker.pojo.Positionmem" >
+    insert into positionmem (position_id, positionmem_id, positionmem_time,
+      positionmem_state, positionmen_reltime,
+      positionmen_endime, positionmen_sum)
+    values (#{positionId,jdbcType=VARCHAR}, #{positionmemId,jdbcType=VARCHAR}, #{positionmemTime,jdbcType=TIMESTAMP},
+      #{positionmemState,jdbcType=INTEGER}, #{positionmenReltime,jdbcType=TIMESTAMP},
+      #{positionmenEndime,jdbcType=TIMESTAMP}, #{positionmenSum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdpi.maker.pojo.Positionmem" >
+    insert into positionmem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="positionId != null" >
+        position_id,
+      </if>
+      <if test="positionmemId != null" >
+        positionmem_id,
+      </if>
+      <if test="positionmemTime != null" >
+        positionmem_time,
+      </if>
+      <if test="positionmemState != null" >
+        positionmem_state,
+      </if>
+      <if test="positionmenReltime != null" >
+        positionmen_reltime,
+      </if>
+      <if test="positionmenEndime != null" >
+        positionmen_endime,
+      </if>
+      <if test="positionmenSum != null" >
+        positionmen_sum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="positionId != null" >
+        #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionmemId != null" >
+        #{positionmemId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionmemTime != null" >
+        #{positionmemTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionmemState != null" >
+        #{positionmemState,jdbcType=INTEGER},
+      </if>
+      <if test="positionmenReltime != null" >
+        #{positionmenReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionmenEndime != null" >
+        #{positionmenEndime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionmenSum != null" >
+        #{positionmenSum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdpi.maker.pojo.PositionmemExample" resultType="java.lang.Integer" >
+    select count(*) from positionmem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update positionmem
+    <set >
+      <if test="record.positionId != null" >
+        position_id = #{record.positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionmemId != null" >
+        positionmem_id = #{record.positionmemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionmemTime != null" >
+        positionmem_time = #{record.positionmemTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.positionmemState != null" >
+        positionmem_state = #{record.positionmemState,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionmenReltime != null" >
+        positionmen_reltime = #{record.positionmenReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.positionmenEndime != null" >
+        positionmen_endime = #{record.positionmenEndime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.positionmenSum != null" >
+        positionmen_sum = #{record.positionmenSum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update positionmem
+    set position_id = #{record.positionId,jdbcType=VARCHAR},
+    positionmem_id = #{record.positionmemId,jdbcType=VARCHAR},
+    positionmem_time = #{record.positionmemTime,jdbcType=TIMESTAMP},
+    positionmem_state = #{record.positionmemState,jdbcType=INTEGER},
+    positionmen_reltime = #{record.positionmenReltime,jdbcType=TIMESTAMP},
+    positionmen_endime = #{record.positionmenEndime,jdbcType=TIMESTAMP},
+    positionmen_sum = #{record.positionmenSum,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

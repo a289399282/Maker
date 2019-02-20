@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdpi.maker.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.gdpi.maker.pojo.Admin" >
+    <id column="ad_id" property="adId" jdbcType="VARCHAR" />
+    <result column="ad_name" property="adName" jdbcType="VARCHAR" />
+    <result column="ad_phone" property="adPhone" jdbcType="CHAR" />
+    <result column="ad_password" property="adPassword" jdbcType="VARCHAR" />
+    <result column="ad_passwordmd5" property="adPasswordmd5" jdbcType="VARCHAR" />
+    <result column="ad_truename" property="adTruename" jdbcType="VARCHAR" />
+    <result column="ad_idcard" property="adIdcard" jdbcType="VARCHAR" />
+    <result column="ad_true" property="adTrue" jdbcType="INTEGER" />
+    <result column="ad_email" property="adEmail" jdbcType="VARCHAR" />
+    <result column="ad_img" property="adImg" jdbcType="VARCHAR" />
+    <result column="ad_registime" property="adRegistime" jdbcType="TIMESTAMP" />
+    <result column="ad_endtime" property="adEndtime" jdbcType="TIMESTAMP" />
+    <result column="ad_start" property="adStart" jdbcType="INTEGER" />
+    <result column="ad_power" property="adPower" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ad_id, ad_name, ad_phone, ad_password, ad_passwordmd5, ad_truename, ad_idcard, ad_true, 
+    ad_email, ad_img, ad_registime, ad_endtime, ad_start, ad_power
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdpi.maker.pojo.AdminExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where ad_id = #{adId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from admin
+    where ad_id = #{adId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdpi.maker.pojo.AdminExample" >
+    delete from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdpi.maker.pojo.Admin" >
+    insert into admin (ad_id, ad_name, ad_phone, 
+      ad_password, ad_passwordmd5, ad_truename, 
+      ad_idcard, ad_true, ad_email, 
+      ad_img, ad_registime, ad_endtime, 
+      ad_start, ad_power)
+    values (#{adId,jdbcType=VARCHAR}, #{adName,jdbcType=VARCHAR}, #{adPhone,jdbcType=CHAR}, 
+      #{adPassword,jdbcType=VARCHAR}, #{adPasswordmd5,jdbcType=VARCHAR}, #{adTruename,jdbcType=VARCHAR}, 
+      #{adIdcard,jdbcType=VARCHAR}, #{adTrue,jdbcType=INTEGER}, #{adEmail,jdbcType=VARCHAR}, 
+      #{adImg,jdbcType=VARCHAR}, #{adRegistime,jdbcType=TIMESTAMP}, #{adEndtime,jdbcType=TIMESTAMP}, 
+      #{adStart,jdbcType=INTEGER}, #{adPower,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdpi.maker.pojo.Admin" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adId != null" >
+        ad_id,
+      </if>
+      <if test="adName != null" >
+        ad_name,
+      </if>
+      <if test="adPhone != null" >
+        ad_phone,
+      </if>
+      <if test="adPassword != null" >
+        ad_password,
+      </if>
+      <if test="adPasswordmd5 != null" >
+        ad_passwordmd5,
+      </if>
+      <if test="adTruename != null" >
+        ad_truename,
+      </if>
+      <if test="adIdcard != null" >
+        ad_idcard,
+      </if>
+      <if test="adTrue != null" >
+        ad_true,
+      </if>
+      <if test="adEmail != null" >
+        ad_email,
+      </if>
+      <if test="adImg != null" >
+        ad_img,
+      </if>
+      <if test="adRegistime != null" >
+        ad_registime,
+      </if>
+      <if test="adEndtime != null" >
+        ad_endtime,
+      </if>
+      <if test="adStart != null" >
+        ad_start,
+      </if>
+      <if test="adPower != null" >
+        ad_power,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adId != null" >
+        #{adId,jdbcType=VARCHAR},
+      </if>
+      <if test="adName != null" >
+        #{adName,jdbcType=VARCHAR},
+      </if>
+      <if test="adPhone != null" >
+        #{adPhone,jdbcType=CHAR},
+      </if>
+      <if test="adPassword != null" >
+        #{adPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adPasswordmd5 != null" >
+        #{adPasswordmd5,jdbcType=VARCHAR},
+      </if>
+      <if test="adTruename != null" >
+        #{adTruename,jdbcType=VARCHAR},
+      </if>
+      <if test="adIdcard != null" >
+        #{adIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="adTrue != null" >
+        #{adTrue,jdbcType=INTEGER},
+      </if>
+      <if test="adEmail != null" >
+        #{adEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adImg != null" >
+        #{adImg,jdbcType=VARCHAR},
+      </if>
+      <if test="adRegistime != null" >
+        #{adRegistime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adEndtime != null" >
+        #{adEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adStart != null" >
+        #{adStart,jdbcType=INTEGER},
+      </if>
+      <if test="adPower != null" >
+        #{adPower,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdpi.maker.pojo.AdminExample" resultType="java.lang.Integer" >
+    select count(*) from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update admin
+    <set >
+      <if test="record.adId != null" >
+        ad_id = #{record.adId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adName != null" >
+        ad_name = #{record.adName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adPhone != null" >
+        ad_phone = #{record.adPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.adPassword != null" >
+        ad_password = #{record.adPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adPasswordmd5 != null" >
+        ad_passwordmd5 = #{record.adPasswordmd5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adTruename != null" >
+        ad_truename = #{record.adTruename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adIdcard != null" >
+        ad_idcard = #{record.adIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adTrue != null" >
+        ad_true = #{record.adTrue,jdbcType=INTEGER},
+      </if>
+      <if test="record.adEmail != null" >
+        ad_email = #{record.adEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adImg != null" >
+        ad_img = #{record.adImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adRegistime != null" >
+        ad_registime = #{record.adRegistime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adEndtime != null" >
+        ad_endtime = #{record.adEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adStart != null" >
+        ad_start = #{record.adStart,jdbcType=INTEGER},
+      </if>
+      <if test="record.adPower != null" >
+        ad_power = #{record.adPower,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update admin
+    set ad_id = #{record.adId,jdbcType=VARCHAR},
+      ad_name = #{record.adName,jdbcType=VARCHAR},
+      ad_phone = #{record.adPhone,jdbcType=CHAR},
+      ad_password = #{record.adPassword,jdbcType=VARCHAR},
+      ad_passwordmd5 = #{record.adPasswordmd5,jdbcType=VARCHAR},
+      ad_truename = #{record.adTruename,jdbcType=VARCHAR},
+      ad_idcard = #{record.adIdcard,jdbcType=VARCHAR},
+      ad_true = #{record.adTrue,jdbcType=INTEGER},
+      ad_email = #{record.adEmail,jdbcType=VARCHAR},
+      ad_img = #{record.adImg,jdbcType=VARCHAR},
+      ad_registime = #{record.adRegistime,jdbcType=TIMESTAMP},
+      ad_endtime = #{record.adEndtime,jdbcType=TIMESTAMP},
+      ad_start = #{record.adStart,jdbcType=INTEGER},
+      ad_power = #{record.adPower,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdpi.maker.pojo.Admin" >
+    update admin
+    <set >
+      <if test="adName != null" >
+        ad_name = #{adName,jdbcType=VARCHAR},
+      </if>
+      <if test="adPhone != null" >
+        ad_phone = #{adPhone,jdbcType=CHAR},
+      </if>
+      <if test="adPassword != null" >
+        ad_password = #{adPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adPasswordmd5 != null" >
+        ad_passwordmd5 = #{adPasswordmd5,jdbcType=VARCHAR},
+      </if>
+      <if test="adTruename != null" >
+        ad_truename = #{adTruename,jdbcType=VARCHAR},
+      </if>
+      <if test="adIdcard != null" >
+        ad_idcard = #{adIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="adTrue != null" >
+        ad_true = #{adTrue,jdbcType=INTEGER},
+      </if>
+      <if test="adEmail != null" >
+        ad_email = #{adEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adImg != null" >
+        ad_img = #{adImg,jdbcType=VARCHAR},
+      </if>
+      <if test="adRegistime != null" >
+        ad_registime = #{adRegistime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adEndtime != null" >
+        ad_endtime = #{adEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adStart != null" >
+        ad_start = #{adStart,jdbcType=INTEGER},
+      </if>
+      <if test="adPower != null" >
+        ad_power = #{adPower,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ad_id = #{adId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdpi.maker.pojo.Admin" >
+    update admin
+    set ad_name = #{adName,jdbcType=VARCHAR},
+      ad_phone = #{adPhone,jdbcType=CHAR},
+      ad_password = #{adPassword,jdbcType=VARCHAR},
+      ad_passwordmd5 = #{adPasswordmd5,jdbcType=VARCHAR},
+      ad_truename = #{adTruename,jdbcType=VARCHAR},
+      ad_idcard = #{adIdcard,jdbcType=VARCHAR},
+      ad_true = #{adTrue,jdbcType=INTEGER},
+      ad_email = #{adEmail,jdbcType=VARCHAR},
+      ad_img = #{adImg,jdbcType=VARCHAR},
+      ad_registime = #{adRegistime,jdbcType=TIMESTAMP},
+      ad_endtime = #{adEndtime,jdbcType=TIMESTAMP},
+      ad_start = #{adStart,jdbcType=INTEGER},
+      ad_power = #{adPower,jdbcType=INTEGER}
+    where ad_id = #{adId,jdbcType=VARCHAR}
+  </update>
+</mapper>

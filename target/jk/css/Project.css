@@ -1,0 +1,459 @@
+@CHARSET "UTF-8";
+/*
+ * 样式引用页面：projectDetailNew.jsp	
+ */
+.click-able {
+	cursor: pointer;
+}
+
+.no-padding {
+	padding: 0px;
+}
+
+.no-margin {
+	margin: 0px;
+}
+
+.f-thide {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	-ms-text-overflow: ellipsis;
+}
+/* 登录提醒 */
+#loginWarning {
+	display: none;
+}
+
+.container-area {
+	margin-top: 63px;
+	width: 100%;
+	background-color: #efefef;
+}
+
+.container-area .row-area {
+	padding: 0px 20px;
+}
+/* 项目部分 */
+.container-area .row-area .project {
+	padding: 0px;
+}
+
+.container-area .row-area .project .navbar-separator {
+	font-size: 21px;
+	color: #6bcc3d;
+	font-weight: bolder;
+}
+
+.container-area .row-area .project .navbar-title {
+	font-size: 21px;
+	color: #2c332c;
+}
+
+.project .detail-area {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.project .detail-area .upper {
+	background: white;
+	padding: 10px;
+	margin: 0px;
+	height: 180px
+}
+
+
+
+.upper .title-area {
+	margin-top: 12px;
+	border-bottom: 1px solid #6bcc3d;
+	padding-bottom: 8px;
+}
+
+.upper .title-area button {
+	background-color: #6bcc3d;
+	color: white;
+	border: 0px;
+	width: 100px;
+	height: 36px;
+	float: right;
+}
+
+.upper .description {
+	margin-top: 25px;
+}
+
+.upper .description li.description-item {
+	margin-right: 34px;
+}
+
+.upper .description li.description-item img {
+	padding-bottom: 8px;
+	margin-right: 5px;
+}
+
+.upper .description li .edit {
+	margin: 0px;
+}
+
+.upper .suggestion {
+	display: grid;
+	margin-bottom: 8px;
+}
+
+.upper .suggestion .size {
+	margin: 0px 0px 5px 0px;
+}
+
+.upper ul.keyword-area {
+	margin-top: 22px;
+	margin-bottom: 0px;
+}
+
+.upper ul.keyword-area li.keyword-item {
+	margin: 6px 7px 0px 0px;
+}
+
+.upper ul.keyword-area li.keyword-item a {
+	padding: 2px 12px;
+	background-color: #6bcc3d;
+	color: white;
+	border-radius: 15px;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.project .detail-area .lower {
+	background: white;
+	padding: 10px;
+	margin: 20px 0px;
+}
+/* 项目 tab 样式 */
+.lower ul.project-content-tabs {
+	border-bottom: 1px solid;
+	border-bottom-color: #eeeeee;
+	margin-left: 0px;
+	margin-top: -5px;
+}
+
+.lower ul.project-content-tabs li {
+	font-size: 16px;
+	float: left;
+	width: 138px;
+	text-align: center;
+}
+
+.lower ul.project-content-tabs li.active {
+	font-size: 16px;
+	float: left;
+	border-bottom: 2px solid;
+	border-bottom-color: #6bcc3d;
+	margin-bottom: -2px;
+}
+
+.lower ul.project-content-tabs li.separator {
+	width: auto;
+	color: #f5f5f5;
+	font-size: 26px;
+	font-weight: 100;
+}
+
+.lower ul.project-content-tabs>li>a {
+	position: relative;
+	display: block;
+	padding: 10px 15px;
+	color: #7D867D;
+}
+
+.lower ul.project-content-tabs>li>a:hover, .project-content-tabs>li>a:focus
+	{
+	text-decoration: none;
+	background-color: transparent;
+	color: #59c51f;
+}
+
+.lower ul.project-content-tabs li.active>a {
+	color: #6bcc3d;
+}
+
+.lower .tab-content {
+	min-height: 440px;
+	overflow: hidden;
+	border: 0px;
+	padding: 16px;
+}
+
+/* 项目模块tab */
+.chapterList .chaptericon, .chapterList .section, .chapterList .section .lessonicon,
+	.chapterList .lessoninfoicon, .chapterList .flag {
+	background: url(./project-detail.png) 9999px 9999px no-repeat;
+}
+
+#projectModule .chapterList {
+	
+}
+
+.chapterList .chapter {
+	position: relative;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.chapterList .chapterhead {
+	height: 38px;
+	padding: 0 20px;
+	line-height: 38px;
+	background: #fafafa;
+}
+
+.chapterList .chapterhead .separator {
+	margin: 12px -10px 0px 0px;
+	width: 0;
+	height: 0;
+	border-top: 15px solid #6bcc3d;
+	border-left: 15px solid transparent;
+}
+
+.chapterList .chapterhead .chaptertitle {
+	width: 52px;
+	text-align: right;
+}
+
+.chapterList .chapterhead .chaptericon {
+	margin: 8px;
+	text-align: center;
+	line-height: 22px;
+}
+
+.chapterList .chapterhead .chaptername {
+	max-width: 80% !important;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.chapterList .section {
+	height: 38px;
+	line-height: 38px;
+	padding: 0 20px;
+	cursor: pointer;
+	background-position: -190px -241px;
+}
+
+.chapterList .section-last {
+	background-position: -190px -300px;
+}
+
+.chapterList .section .lessonicon-0 {
+	margin-left: 64px;
+}
+
+.chapterList .section .lesson {
+	/* width:65px; */
+	text-align: left;
+	margin-left: 10px;
+	padding-right: 25px;
+}
+
+.chapterList .section .lessonname {
+	max-width: 80% !important;
+	margin-left: -16px;
+}
+/* 参考文件tab */
+#referenceFile .separator {
+	font-size: 16px;
+	color: #6bcc3d;
+	font-weight: bolder;
+}
+/* 参考文件  图片项*/
+#referenceFile ul.reference-img-item {
+	list-style: none;
+	margin-left: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+#referenceFile ul.reference-img-item li {
+	margin: 10px 10px 10px 0px;
+	float: left;
+	width: 212px;
+	height: 180px;
+	text-align: -webkit-center;
+	padding: 10px;
+	border: 1px solid #f5f5f5;
+}
+/* 参考文件  文档*/
+#referenceFile ul.reference-doc-item {
+	list-style: none;
+	margin-left: 10px;
+	overflow: hidden;
+	padding: 0px;
+}
+
+#referenceFile ul.reference-doc-item li {
+	margin: 10px 10px;
+	float: left;
+	text-align: center;
+}
+
+ul.reference-doc-item li a:hover, ul.reference-doc-item li a:focus {
+	text-decoration: none;
+}
+
+ul.reference-img-item li div.file-name, ul.reference-doc-item li div.file-name
+	{
+	width: 100px;
+	height: 20px;
+	margin: 10px auto;
+	overflow: hidden; /*自动隐藏文字*/
+	text-overflow: ellipsis; /*文字隐藏后添加省略号*/
+	white-space: nowrap; /*强制不换行*/
+}
+/* 学生成果秀  列表*/
+#resultShow ul.demoVideos {
+	list-style: none;
+	margin-left: 0px;
+	overflow: hidden;
+	padding: 0px;
+}
+
+#resultShow ul.demoVideos li.videos-item {
+	float: left;
+	margin: 10px 10px;
+	text-align: -webkit-center;
+}
+
+#resultShow ul.demoVideos li.videos-item img {
+	width: 200px;
+	height: 115px;
+}
+
+#resultShow ul.demoVideos li.videos-item .learner-name {
+	margin-top: 10px;
+}
+/* 项目评价 */
+.container-area .row-area .comment {
+	padding: 0px;
+}
+
+.container-area .row-area .comment .navbar-separator {
+	font-size: 21px;
+	color: #6bcc3d;
+	font-weight: bolder;
+}
+
+.container-area .row-area .comment .navbar-title {
+	font-size: 21px;
+	color: #2c332c;
+}
+
+.comment .comment-area {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.comment .comment-area #showEveryOneEvaluate {
+	float: left;
+	width: 100%;
+	height: 592px;
+	overflow: hidden;
+	background-color: #eeeeee;
+}
+/* 界面comment-box */
+#showEveryOneEvaluate .comment-box {
+	background-color: white;
+	padding: 20px;
+	margin-bottom: 10px;
+}
+/* modal comment-box */
+#showMoreCourseComment .comment-box {
+	padding: 10px;
+}
+
+.comment-box .upper {
+	margin-right: 10px;
+	height: 35px;
+}
+
+.comment-box .upper img {
+	width: 35px;
+	height: 35px;
+	float: left;
+}
+
+.comment-box .upper .container-item {
+	margin-left: 10px;
+}
+
+.comment-box .upper .container-item .learner-name {
+	margin: 0px 5px 0px 10px;
+}
+
+.comment-box .upper .container-item .time {
+	margin-left: 15px;
+	float: right;
+}
+
+.comment-box .lower {
+	margin-top: 10px;
+}
+
+.comment-box .lower .comment-container {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+/* Hot标签 */
+.hot-symbol {
+	background-image: url(../images/home/hot_symbol.svg);
+	width: 18px;
+	height: 18px !important;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-bottom: -2px;
+	margin-left: 6px;
+	border: 1p;
+	display: inline-block;
+}
+
+/* 进群二维码  */
+.qr-content {
+	padding: 40px 0px;
+	width: 100%;
+	margin-top: 45px;
+	min-height: 300px;
+	background-color: #fff;
+	border-radius: 8px;
+	margin-bottom: 40px;
+	overflow: hidden;
+	display: none;
+}
+.qr-content.qr-show {
+	display: block;
+}
+.qr-content img {
+	display: block;
+	width: 180px;
+	height: 180px;
+	align-content: center;
+	margin: 0 auto;
+}
+
+.qr-content-title {
+	margin-top: 20px;
+	width: 100%;
+	font-size: 18px;
+	color: #333;
+	text-align: center;
+	padding: 0 10px;
+}
+
+.qr-content-sub {
+	text-align: center;
+	margin-top: 4px;
+	width: 100%;
+	padding: 0 10px;
+	color:#999;
+}

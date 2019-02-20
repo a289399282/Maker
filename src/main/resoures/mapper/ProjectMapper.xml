@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdpi.maker.mapper.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.gdpi.maker.pojo.Project" >
+    <id column="pro_id" property="proId" jdbcType="VARCHAR" />
+    <result column="pro_publisher" property="proPublisher" jdbcType="VARCHAR" />
+    <result column="pro_pubname" property="proPubname" jdbcType="VARCHAR" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_type" property="proType" jdbcType="VARCHAR" />
+    <result column="pro_money" property="proMoney" jdbcType="VARCHAR" />
+    <result column="pro_foutime" property="proFoutime" jdbcType="TIMESTAMP" />
+    <result column="pro_reltime" property="proReltime" jdbcType="TIMESTAMP" />
+    <result column="pro_endtime" property="proEndtime" jdbcType="TIMESTAMP" />
+    <result column="pro_city" property="proCity" jdbcType="VARCHAR" />
+    <result column="pro_heat" property="proHeat" jdbcType="INTEGER" />
+    <result column="pro_state" property="proState" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gdpi.maker.pojo.Project" extends="BaseResultMap" >
+    <result column="pro_info" property="proInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pro_id, pro_publisher, pro_pubname, pro_name, pro_type, pro_money, pro_foutime, pro_reltime, 
+    pro_endtime, pro_city, pro_heat, pro_state
+  </sql>
+  <sql id="Blob_Column_List" >
+    pro_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.ProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdpi.maker.pojo.ProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from project
+    where pro_id = #{proId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from project
+    where pro_id = #{proId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdpi.maker.pojo.ProjectExample" >
+    delete from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdpi.maker.pojo.Project" >
+    insert into project (pro_id, pro_publisher, pro_pubname, 
+      pro_name, pro_type, pro_money, 
+      pro_foutime, pro_reltime, pro_endtime, 
+      pro_city, pro_heat, pro_state, 
+      pro_info)
+    values (#{proId,jdbcType=VARCHAR}, #{proPublisher,jdbcType=VARCHAR}, #{proPubname,jdbcType=VARCHAR}, 
+      #{proName,jdbcType=VARCHAR}, #{proType,jdbcType=VARCHAR}, #{proMoney,jdbcType=VARCHAR}, 
+      #{proFoutime,jdbcType=TIMESTAMP}, #{proReltime,jdbcType=TIMESTAMP}, #{proEndtime,jdbcType=TIMESTAMP}, 
+      #{proCity,jdbcType=VARCHAR}, #{proHeat,jdbcType=INTEGER}, #{proState,jdbcType=INTEGER}, 
+      #{proInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdpi.maker.pojo.Project" >
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="proPublisher != null" >
+        pro_publisher,
+      </if>
+      <if test="proPubname != null" >
+        pro_pubname,
+      </if>
+      <if test="proName != null" >
+        pro_name,
+      </if>
+      <if test="proType != null" >
+        pro_type,
+      </if>
+      <if test="proMoney != null" >
+        pro_money,
+      </if>
+      <if test="proFoutime != null" >
+        pro_foutime,
+      </if>
+      <if test="proReltime != null" >
+        pro_reltime,
+      </if>
+      <if test="proEndtime != null" >
+        pro_endtime,
+      </if>
+      <if test="proCity != null" >
+        pro_city,
+      </if>
+      <if test="proHeat != null" >
+        pro_heat,
+      </if>
+      <if test="proState != null" >
+        pro_state,
+      </if>
+      <if test="proInfo != null" >
+        pro_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        #{proId,jdbcType=VARCHAR},
+      </if>
+      <if test="proPublisher != null" >
+        #{proPublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="proPubname != null" >
+        #{proPubname,jdbcType=VARCHAR},
+      </if>
+      <if test="proName != null" >
+        #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proType != null" >
+        #{proType,jdbcType=VARCHAR},
+      </if>
+      <if test="proMoney != null" >
+        #{proMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="proFoutime != null" >
+        #{proFoutime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proReltime != null" >
+        #{proReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proEndtime != null" >
+        #{proEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proCity != null" >
+        #{proCity,jdbcType=VARCHAR},
+      </if>
+      <if test="proHeat != null" >
+        #{proHeat,jdbcType=INTEGER},
+      </if>
+      <if test="proState != null" >
+        #{proState,jdbcType=INTEGER},
+      </if>
+      <if test="proInfo != null" >
+        #{proInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdpi.maker.pojo.ProjectExample" resultType="java.lang.Integer" >
+    select count(*) from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update project
+    <set >
+      <if test="record.proId != null" >
+        pro_id = #{record.proId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proPublisher != null" >
+        pro_publisher = #{record.proPublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proPubname != null" >
+        pro_pubname = #{record.proPubname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proName != null" >
+        pro_name = #{record.proName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proType != null" >
+        pro_type = #{record.proType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proMoney != null" >
+        pro_money = #{record.proMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proFoutime != null" >
+        pro_foutime = #{record.proFoutime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.proReltime != null" >
+        pro_reltime = #{record.proReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.proEndtime != null" >
+        pro_endtime = #{record.proEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.proCity != null" >
+        pro_city = #{record.proCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proHeat != null" >
+        pro_heat = #{record.proHeat,jdbcType=INTEGER},
+      </if>
+      <if test="record.proState != null" >
+        pro_state = #{record.proState,jdbcType=INTEGER},
+      </if>
+      <if test="record.proInfo != null" >
+        pro_info = #{record.proInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update project
+    set pro_id = #{record.proId,jdbcType=VARCHAR},
+    pro_publisher = #{record.proPublisher,jdbcType=VARCHAR},
+    pro_pubname = #{record.proPubname,jdbcType=VARCHAR},
+    pro_name = #{record.proName,jdbcType=VARCHAR},
+    pro_type = #{record.proType,jdbcType=VARCHAR},
+    pro_money = #{record.proMoney,jdbcType=VARCHAR},
+    pro_foutime = #{record.proFoutime,jdbcType=TIMESTAMP},
+    pro_reltime = #{record.proReltime,jdbcType=TIMESTAMP},
+    pro_endtime = #{record.proEndtime,jdbcType=TIMESTAMP},
+    pro_city = #{record.proCity,jdbcType=VARCHAR},
+    pro_heat = #{record.proHeat,jdbcType=INTEGER},
+    pro_state = #{record.proState,jdbcType=INTEGER},
+    pro_info = #{record.proInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project
+    set pro_id = #{record.proId,jdbcType=VARCHAR},
+    pro_publisher = #{record.proPublisher,jdbcType=VARCHAR},
+    pro_pubname = #{record.proPubname,jdbcType=VARCHAR},
+    pro_name = #{record.proName,jdbcType=VARCHAR},
+    pro_type = #{record.proType,jdbcType=VARCHAR},
+    pro_money = #{record.proMoney,jdbcType=VARCHAR},
+    pro_foutime = #{record.proFoutime,jdbcType=TIMESTAMP},
+    pro_reltime = #{record.proReltime,jdbcType=TIMESTAMP},
+    pro_endtime = #{record.proEndtime,jdbcType=TIMESTAMP},
+    pro_city = #{record.proCity,jdbcType=VARCHAR},
+    pro_heat = #{record.proHeat,jdbcType=INTEGER},
+    pro_state = #{record.proState,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdpi.maker.pojo.Project" >
+    update project
+    <set >
+      <if test="proPublisher != null" >
+        pro_publisher = #{proPublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="proPubname != null" >
+        pro_pubname = #{proPubname,jdbcType=VARCHAR},
+      </if>
+      <if test="proName != null" >
+        pro_name = #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proType != null" >
+        pro_type = #{proType,jdbcType=VARCHAR},
+      </if>
+      <if test="proMoney != null" >
+        pro_money = #{proMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="proFoutime != null" >
+        pro_foutime = #{proFoutime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proReltime != null" >
+        pro_reltime = #{proReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proEndtime != null" >
+        pro_endtime = #{proEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proCity != null" >
+        pro_city = #{proCity,jdbcType=VARCHAR},
+      </if>
+      <if test="proHeat != null" >
+        pro_heat = #{proHeat,jdbcType=INTEGER},
+      </if>
+      <if test="proState != null" >
+        pro_state = #{proState,jdbcType=INTEGER},
+      </if>
+      <if test="proInfo != null" >
+        pro_info = #{proInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where pro_id = #{proId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gdpi.maker.pojo.Project" >
+    update project
+    set pro_publisher = #{proPublisher,jdbcType=VARCHAR},
+      pro_pubname = #{proPubname,jdbcType=VARCHAR},
+      pro_name = #{proName,jdbcType=VARCHAR},
+      pro_type = #{proType,jdbcType=VARCHAR},
+      pro_money = #{proMoney,jdbcType=VARCHAR},
+      pro_foutime = #{proFoutime,jdbcType=TIMESTAMP},
+      pro_reltime = #{proReltime,jdbcType=TIMESTAMP},
+      pro_endtime = #{proEndtime,jdbcType=TIMESTAMP},
+      pro_city = #{proCity,jdbcType=VARCHAR},
+      pro_heat = #{proHeat,jdbcType=INTEGER},
+      pro_state = #{proState,jdbcType=INTEGER},
+      pro_info = #{proInfo,jdbcType=LONGVARCHAR}
+    where pro_id = #{proId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdpi.maker.pojo.Project" >
+    update project
+    set pro_publisher = #{proPublisher,jdbcType=VARCHAR},
+      pro_pubname = #{proPubname,jdbcType=VARCHAR},
+      pro_name = #{proName,jdbcType=VARCHAR},
+      pro_type = #{proType,jdbcType=VARCHAR},
+      pro_money = #{proMoney,jdbcType=VARCHAR},
+      pro_foutime = #{proFoutime,jdbcType=TIMESTAMP},
+      pro_reltime = #{proReltime,jdbcType=TIMESTAMP},
+      pro_endtime = #{proEndtime,jdbcType=TIMESTAMP},
+      pro_city = #{proCity,jdbcType=VARCHAR},
+      pro_heat = #{proHeat,jdbcType=INTEGER},
+      pro_state = #{proState,jdbcType=INTEGER}
+    where pro_id = #{proId,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- <<<<<<<<<<<<<<<< 自己写的 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+  <select id="selectOneProject" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.Project" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from project
+    where 1=1
+      <if test="proId != null" >
+        and pro_id = #{proId,jdbcType=VARCHAR}
+      </if>
+      <if test="proPublisher != null" >
+        and pro_publisher = #{proPublisher,jdbcType=VARCHAR}
+      </if>
+      <if test="proPubname != null" >
+        and pro_pubname = #{proPubname,jdbcType=VARCHAR}
+      </if>
+      <if test="proName != null" >
+        and pro_name = #{proName,jdbcType=VARCHAR}
+      </if>
+      <if test="proType != null" >
+        and pro_type = #{proType,jdbcType=VARCHAR}
+      </if>
+      <if test="proMoney != null" >
+        and pro_money = #{proMoney,jdbcType=VARCHAR}
+      </if>
+      <if test="proFoutime != null" >
+        and pro_foutime = #{proFoutime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="proReltime != null" >
+        and pro_reltime = #{proReltime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="proEndtime != null" >
+        and pro_endtime = #{proEndtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="proCity != null" >
+        and pro_city = #{proCity,jdbcType=VARCHAR}
+      </if>
+      <if test="proHeat != null" >
+        and pro_heat = #{proHeat,jdbcType=INTEGER}
+      </if>
+      <if test="proState != null" >
+        and pro_state = #{proState,jdbcType=INTEGER}
+      </if>
+
+  </select>
+</mapper>

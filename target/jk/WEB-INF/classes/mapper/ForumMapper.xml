@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdpi.maker.mapper.ForumMapper" >
+  <resultMap id="BaseResultMap" type="com.gdpi.maker.pojo.Forum" >
+    <id column="forum_id" property="forumId" jdbcType="VARCHAR" />
+    <result column="forummem_id" property="forummemId" jdbcType="VARCHAR" />
+    <result column="forum_what" property="forumWhat" jdbcType="INTEGER" />
+    <result column="forum_route" property="forumRoute" jdbcType="VARCHAR" />
+    <result column="forum_forid" property="forumForid" jdbcType="VARCHAR" />
+    <result column="forum_reltime" property="forumReltime" jdbcType="TIMESTAMP" />
+    <result column="forum_name" property="forumName" jdbcType="VARCHAR" />
+    <result column="forum_type" property="forumType" jdbcType="VARCHAR" />
+    <result column="forum_heat" property="forumHeat" jdbcType="INTEGER" />
+    <result column="forum_start" property="forumStart" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gdpi.maker.pojo.ForumWithBLOBs" extends="BaseResultMap" >
+    <result column="forum_info" property="forumInfo" jdbcType="LONGVARCHAR" />
+    <result column="forum_textAfter" property="forumTextafter" jdbcType="LONGVARCHAR" />
+    <result column="forum_text" property="forumText" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    forum_id, forummem_id, forum_what, forum_route, forum_forid, forum_reltime, forum_name,
+    forum_type, forum_heat, forum_start
+  </sql>
+  <sql id="Blob_Column_List" >
+    forum_info, forum_textAfter, forum_text
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.ForumExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from forum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdpi.maker.pojo.ForumExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from forum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from forum
+    where forum_id = #{forumId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from forum
+    where forum_id = #{forumId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdpi.maker.pojo.ForumExample" >
+    delete from forum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdpi.maker.pojo.ForumWithBLOBs" >
+    insert into forum (forum_id, forummem_id, forum_what,
+      forum_route, forum_forid, forum_reltime,
+      forum_name, forum_type, forum_heat,
+      forum_start, forum_info, forum_textAfter,
+      forum_text)
+    values (#{forumId,jdbcType=VARCHAR}, #{forummemId,jdbcType=VARCHAR}, #{forumWhat,jdbcType=INTEGER},
+      #{forumRoute,jdbcType=VARCHAR}, #{forumForid,jdbcType=VARCHAR}, #{forumReltime,jdbcType=TIMESTAMP},
+      #{forumName,jdbcType=VARCHAR}, #{forumType,jdbcType=VARCHAR}, #{forumHeat,jdbcType=INTEGER},
+      #{forumStart,jdbcType=INTEGER}, #{forumInfo,jdbcType=LONGVARCHAR}, #{forumTextafter,jdbcType=LONGVARCHAR},
+      #{forumText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdpi.maker.pojo.ForumWithBLOBs" >
+    insert into forum
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="forumId != null" >
+        forum_id,
+      </if>
+      <if test="forummemId != null" >
+        forummem_id,
+      </if>
+      <if test="forumWhat != null" >
+        forum_what,
+      </if>
+      <if test="forumRoute != null" >
+        forum_route,
+      </if>
+      <if test="forumForid != null" >
+        forum_forid,
+      </if>
+      <if test="forumReltime != null" >
+        forum_reltime,
+      </if>
+      <if test="forumName != null" >
+        forum_name,
+      </if>
+      <if test="forumType != null" >
+        forum_type,
+      </if>
+      <if test="forumHeat != null" >
+        forum_heat,
+      </if>
+      <if test="forumStart != null" >
+        forum_start,
+      </if>
+      <if test="forumInfo != null" >
+        forum_info,
+      </if>
+      <if test="forumTextafter != null" >
+        forum_textAfter,
+      </if>
+      <if test="forumText != null" >
+        forum_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="forumId != null" >
+        #{forumId,jdbcType=VARCHAR},
+      </if>
+      <if test="forummemId != null" >
+        #{forummemId,jdbcType=VARCHAR},
+      </if>
+      <if test="forumWhat != null" >
+        #{forumWhat,jdbcType=INTEGER},
+      </if>
+      <if test="forumRoute != null" >
+        #{forumRoute,jdbcType=VARCHAR},
+      </if>
+      <if test="forumForid != null" >
+        #{forumForid,jdbcType=VARCHAR},
+      </if>
+      <if test="forumReltime != null" >
+        #{forumReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forumName != null" >
+        #{forumName,jdbcType=VARCHAR},
+      </if>
+      <if test="forumType != null" >
+        #{forumType,jdbcType=VARCHAR},
+      </if>
+      <if test="forumHeat != null" >
+        #{forumHeat,jdbcType=INTEGER},
+      </if>
+      <if test="forumStart != null" >
+        #{forumStart,jdbcType=INTEGER},
+      </if>
+      <if test="forumInfo != null" >
+        #{forumInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="forumTextafter != null" >
+        #{forumTextafter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="forumText != null" >
+        #{forumText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdpi.maker.pojo.ForumExample" resultType="java.lang.Integer" >
+    select count(*) from forum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update forum
+    <set >
+      <if test="record.forumId != null" >
+        forum_id = #{record.forumId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forummemId != null" >
+        forummem_id = #{record.forummemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forumWhat != null" >
+        forum_what = #{record.forumWhat,jdbcType=INTEGER},
+      </if>
+      <if test="record.forumRoute != null" >
+        forum_route = #{record.forumRoute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forumForid != null" >
+        forum_forid = #{record.forumForid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forumReltime != null" >
+        forum_reltime = #{record.forumReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.forumName != null" >
+        forum_name = #{record.forumName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forumType != null" >
+        forum_type = #{record.forumType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forumHeat != null" >
+        forum_heat = #{record.forumHeat,jdbcType=INTEGER},
+      </if>
+      <if test="record.forumStart != null" >
+        forum_start = #{record.forumStart,jdbcType=INTEGER},
+      </if>
+      <if test="record.forumInfo != null" >
+        forum_info = #{record.forumInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.forumTextafter != null" >
+        forum_textAfter = #{record.forumTextafter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.forumText != null" >
+        forum_text = #{record.forumText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update forum
+    set forum_id = #{record.forumId,jdbcType=VARCHAR},
+    forummem_id = #{record.forummemId,jdbcType=VARCHAR},
+    forum_what = #{record.forumWhat,jdbcType=INTEGER},
+    forum_route = #{record.forumRoute,jdbcType=VARCHAR},
+    forum_forid = #{record.forumForid,jdbcType=VARCHAR},
+    forum_reltime = #{record.forumReltime,jdbcType=TIMESTAMP},
+    forum_name = #{record.forumName,jdbcType=VARCHAR},
+    forum_type = #{record.forumType,jdbcType=VARCHAR},
+    forum_heat = #{record.forumHeat,jdbcType=INTEGER},
+    forum_start = #{record.forumStart,jdbcType=INTEGER},
+    forum_info = #{record.forumInfo,jdbcType=LONGVARCHAR},
+    forum_textAfter = #{record.forumTextafter,jdbcType=LONGVARCHAR},
+    forum_text = #{record.forumText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update forum
+    set forum_id = #{record.forumId,jdbcType=VARCHAR},
+    forummem_id = #{record.forummemId,jdbcType=VARCHAR},
+    forum_what = #{record.forumWhat,jdbcType=INTEGER},
+    forum_route = #{record.forumRoute,jdbcType=VARCHAR},
+    forum_forid = #{record.forumForid,jdbcType=VARCHAR},
+    forum_reltime = #{record.forumReltime,jdbcType=TIMESTAMP},
+    forum_name = #{record.forumName,jdbcType=VARCHAR},
+    forum_type = #{record.forumType,jdbcType=VARCHAR},
+    forum_heat = #{record.forumHeat,jdbcType=INTEGER},
+    forum_start = #{record.forumStart,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdpi.maker.pojo.ForumWithBLOBs" >
+    update forum
+    <set >
+      <if test="forummemId != null" >
+        forummem_id = #{forummemId,jdbcType=VARCHAR},
+      </if>
+      <if test="forumWhat != null" >
+        forum_what = #{forumWhat,jdbcType=INTEGER},
+      </if>
+      <if test="forumRoute != null" >
+        forum_route = #{forumRoute,jdbcType=VARCHAR},
+      </if>
+      <if test="forumForid != null" >
+        forum_forid = #{forumForid,jdbcType=VARCHAR},
+      </if>
+      <if test="forumReltime != null" >
+        forum_reltime = #{forumReltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forumName != null" >
+        forum_name = #{forumName,jdbcType=VARCHAR},
+      </if>
+      <if test="forumType != null" >
+        forum_type = #{forumType,jdbcType=VARCHAR},
+      </if>
+      <if test="forumHeat != null" >
+        forum_heat = #{forumHeat,jdbcType=INTEGER},
+      </if>
+      <if test="forumStart != null" >
+        forum_start = #{forumStart,jdbcType=INTEGER},
+      </if>
+      <if test="forumInfo != null" >
+        forum_info = #{forumInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="forumTextafter != null" >
+        forum_textAfter = #{forumTextafter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="forumText != null" >
+        forum_text = #{forumText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where forum_id = #{forumId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gdpi.maker.pojo.ForumWithBLOBs" >
+    update forum
+    set forummem_id = #{forummemId,jdbcType=VARCHAR},
+      forum_what = #{forumWhat,jdbcType=INTEGER},
+      forum_route = #{forumRoute,jdbcType=VARCHAR},
+      forum_forid = #{forumForid,jdbcType=VARCHAR},
+      forum_reltime = #{forumReltime,jdbcType=TIMESTAMP},
+      forum_name = #{forumName,jdbcType=VARCHAR},
+      forum_type = #{forumType,jdbcType=VARCHAR},
+      forum_heat = #{forumHeat,jdbcType=INTEGER},
+      forum_start = #{forumStart,jdbcType=INTEGER},
+      forum_info = #{forumInfo,jdbcType=LONGVARCHAR},
+      forum_textAfter = #{forumTextafter,jdbcType=LONGVARCHAR},
+      forum_text = #{forumText,jdbcType=LONGVARCHAR}
+    where forum_id = #{forumId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdpi.maker.pojo.Forum" >
+    update forum
+    set forummem_id = #{forummemId,jdbcType=VARCHAR},
+      forum_what = #{forumWhat,jdbcType=INTEGER},
+      forum_route = #{forumRoute,jdbcType=VARCHAR},
+      forum_forid = #{forumForid,jdbcType=VARCHAR},
+      forum_reltime = #{forumReltime,jdbcType=TIMESTAMP},
+      forum_name = #{forumName,jdbcType=VARCHAR},
+      forum_type = #{forumType,jdbcType=VARCHAR},
+      forum_heat = #{forumHeat,jdbcType=INTEGER},
+      forum_start = #{forumStart,jdbcType=INTEGER}
+    where forum_id = #{forumId,jdbcType=VARCHAR}
+  </update>
+
+  <!-- <<<<<<<<<<<<<<<<<<<<<< 自己写的 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+  <select id="selectOneForum" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.Forum" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from forum 
+    where 1=1
+      <if test="forumId != null" >
+        and forum_id = #{forumId,jdbcType=VARCHAR}
+      </if>
+      <if test="forummemId != null" >
+        and forummem_id = #{forummemId,jdbcType=VARCHAR}
+      </if>
+      <if test="forumWhat != null" >
+        and forum_what = #{forumWhat,jdbcType=INTEGER}
+      </if>
+      <if test="forumRoute != null" >
+        and forum_route = #{forumRoute,jdbcType=VARCHAR}
+      </if>
+      <if test="forumForid != null" >
+        and forum_forid = #{forumForid,jdbcType=VARCHAR}
+      </if>
+      <if test="forumReltime != null" >
+        and forum_reltime = #{forumReltime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="forumName != null" >
+        and forum_name = #{forumName,jdbcType=VARCHAR}
+      </if>
+      <if test="forumType != null" >
+        and forum_type = #{forumType,jdbcType=VARCHAR}
+      </if>
+      <if test="forumHeat != null" >
+        and forum_heat = #{forumHeat,jdbcType=INTEGER}
+      </if>
+      <if test="forumStart != null" >
+        and forum_start = #{forumStart,jdbcType=INTEGER}
+      </if>
+      <if test="forumInfo != null" >
+        and forum_info = #{forumInfo,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="forumText != null" >
+        and forum_text = #{forumText,jdbcType=LONGVARCHAR}
+      </if>
+  </select>
+  
+</mapper>

@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdpi.maker.mapper.DeveloperMapper" >
+  <resultMap id="BaseResultMap" type="com.gdpi.maker.pojo.Developer" >
+    <id column="dev_id" property="devId" jdbcType="VARCHAR" />
+    <result column="dev_name" property="devName" jdbcType="VARCHAR" />
+    <result column="dev_password" property="devPassword" jdbcType="VARCHAR" />
+    <result column="dev_passwordmd5" property="devPasswordmd5" jdbcType="VARCHAR" />
+    <result column="dev_number" property="devNumber" jdbcType="CHAR" />
+    <result column="dev_school" property="devSchool" jdbcType="VARCHAR" />
+    <result column="dev_truename" property="devTruename" jdbcType="VARCHAR" />
+    <result column="dev_idcard" property="devIdcard" jdbcType="VARCHAR" />
+    <result column="dev_true" property="devTrue" jdbcType="INTEGER" />
+    <result column="dev_img" property="devImg" jdbcType="VARCHAR" />
+    <result column="dev_phone" property="devPhone" jdbcType="CHAR" />
+    <result column="dev_email" property="devEmail" jdbcType="VARCHAR" />
+    <result column="dev_location" property="devLocation" jdbcType="VARCHAR" />
+    <result column="dev_speciality" property="devSpeciality" jdbcType="VARCHAR" />
+    <result column="dev_back" property="devBack" jdbcType="INTEGER" />
+    <result column="dev_praise" property="devPraise" jdbcType="INTEGER" />
+    <result column="dev_registime" property="devRegistime" jdbcType="TIMESTAMP" />
+    <result column="dev_idchange" property="devIdchange" jdbcType="INTEGER" />
+    <result column="dev_cancellation" property="devCancellation" jdbcType="INTEGER" />
+    <result column="dev_cancellationtime" property="devCancellationtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gdpi.maker.pojo.Developer" extends="BaseResultMap" >
+    <result column="dev_info" property="devInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dev_id, dev_name, dev_password, dev_passwordmd5, dev_number, dev_school, dev_truename, 
+    dev_idcard, dev_true, dev_img, dev_phone, dev_email, dev_location, dev_speciality, 
+    dev_back, dev_praise, dev_registime, dev_idchange, dev_cancellation, dev_cancellationtime
+  </sql>
+  <sql id="Blob_Column_List" >
+    dev_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.DeveloperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from developer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gdpi.maker.pojo.DeveloperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from developer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from developer
+    where dev_id = #{devId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from developer
+    where dev_id = #{devId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdpi.maker.pojo.DeveloperExample" >
+    delete from developer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdpi.maker.pojo.Developer" >
+    insert into developer (dev_id, dev_name, dev_password, 
+      dev_passwordmd5, dev_number, dev_school, 
+      dev_truename, dev_idcard, dev_true, 
+      dev_img, dev_phone, dev_email, 
+      dev_location, dev_speciality, dev_back, 
+      dev_praise, dev_registime, dev_idchange, 
+      dev_cancellation, dev_cancellationtime, 
+      dev_info)
+    values (#{devId,jdbcType=VARCHAR}, #{devName,jdbcType=VARCHAR}, #{devPassword,jdbcType=VARCHAR}, 
+      #{devPasswordmd5,jdbcType=VARCHAR}, #{devNumber,jdbcType=CHAR}, #{devSchool,jdbcType=VARCHAR}, 
+      #{devTruename,jdbcType=VARCHAR}, #{devIdcard,jdbcType=VARCHAR}, #{devTrue,jdbcType=INTEGER}, 
+      #{devImg,jdbcType=VARCHAR}, #{devPhone,jdbcType=CHAR}, #{devEmail,jdbcType=VARCHAR}, 
+      #{devLocation,jdbcType=VARCHAR}, #{devSpeciality,jdbcType=VARCHAR}, #{devBack,jdbcType=INTEGER}, 
+      #{devPraise,jdbcType=INTEGER}, #{devRegistime,jdbcType=TIMESTAMP}, #{devIdchange,jdbcType=INTEGER}, 
+      #{devCancellation,jdbcType=INTEGER}, #{devCancellationtime,jdbcType=TIMESTAMP}, 
+      #{devInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdpi.maker.pojo.Developer" >
+    insert into developer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="devId != null" >
+        dev_id,
+      </if>
+      <if test="devName != null" >
+        dev_name,
+      </if>
+      <if test="devPassword != null" >
+        dev_password,
+      </if>
+      <if test="devPasswordmd5 != null" >
+        dev_passwordmd5,
+      </if>
+      <if test="devNumber != null" >
+        dev_number,
+      </if>
+      <if test="devSchool != null" >
+        dev_school,
+      </if>
+      <if test="devTruename != null" >
+        dev_truename,
+      </if>
+      <if test="devIdcard != null" >
+        dev_idcard,
+      </if>
+      <if test="devTrue != null" >
+        dev_true,
+      </if>
+      <if test="devImg != null" >
+        dev_img,
+      </if>
+      <if test="devPhone != null" >
+        dev_phone,
+      </if>
+      <if test="devEmail != null" >
+        dev_email,
+      </if>
+      <if test="devLocation != null" >
+        dev_location,
+      </if>
+      <if test="devSpeciality != null" >
+        dev_speciality,
+      </if>
+      <if test="devBack != null" >
+        dev_back,
+      </if>
+      <if test="devPraise != null" >
+        dev_praise,
+      </if>
+      <if test="devRegistime != null" >
+        dev_registime,
+      </if>
+      <if test="devIdchange != null" >
+        dev_idchange,
+      </if>
+      <if test="devCancellation != null" >
+        dev_cancellation,
+      </if>
+      <if test="devCancellationtime != null" >
+        dev_cancellationtime,
+      </if>
+      <if test="devInfo != null" >
+        dev_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="devId != null" >
+        #{devId,jdbcType=VARCHAR},
+      </if>
+      <if test="devName != null" >
+        #{devName,jdbcType=VARCHAR},
+      </if>
+      <if test="devPassword != null" >
+        #{devPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="devPasswordmd5 != null" >
+        #{devPasswordmd5,jdbcType=VARCHAR},
+      </if>
+      <if test="devNumber != null" >
+        #{devNumber,jdbcType=CHAR},
+      </if>
+      <if test="devSchool != null" >
+        #{devSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="devTruename != null" >
+        #{devTruename,jdbcType=VARCHAR},
+      </if>
+      <if test="devIdcard != null" >
+        #{devIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="devTrue != null" >
+        #{devTrue,jdbcType=INTEGER},
+      </if>
+      <if test="devImg != null" >
+        #{devImg,jdbcType=VARCHAR},
+      </if>
+      <if test="devPhone != null" >
+        #{devPhone,jdbcType=CHAR},
+      </if>
+      <if test="devEmail != null" >
+        #{devEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="devLocation != null" >
+        #{devLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="devSpeciality != null" >
+        #{devSpeciality,jdbcType=VARCHAR},
+      </if>
+      <if test="devBack != null" >
+        #{devBack,jdbcType=INTEGER},
+      </if>
+      <if test="devPraise != null" >
+        #{devPraise,jdbcType=INTEGER},
+      </if>
+      <if test="devRegistime != null" >
+        #{devRegistime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devIdchange != null" >
+        #{devIdchange,jdbcType=INTEGER},
+      </if>
+      <if test="devCancellation != null" >
+        #{devCancellation,jdbcType=INTEGER},
+      </if>
+      <if test="devCancellationtime != null" >
+        #{devCancellationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devInfo != null" >
+        #{devInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdpi.maker.pojo.DeveloperExample" resultType="java.lang.Integer" >
+    select count(*) from developer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update developer
+    <set >
+      <if test="record.devId != null" >
+        dev_id = #{record.devId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devName != null" >
+        dev_name = #{record.devName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devPassword != null" >
+        dev_password = #{record.devPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devPasswordmd5 != null" >
+        dev_passwordmd5 = #{record.devPasswordmd5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devNumber != null" >
+        dev_number = #{record.devNumber,jdbcType=CHAR},
+      </if>
+      <if test="record.devSchool != null" >
+        dev_school = #{record.devSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTruename != null" >
+        dev_truename = #{record.devTruename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devIdcard != null" >
+        dev_idcard = #{record.devIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTrue != null" >
+        dev_true = #{record.devTrue,jdbcType=INTEGER},
+      </if>
+      <if test="record.devImg != null" >
+        dev_img = #{record.devImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devPhone != null" >
+        dev_phone = #{record.devPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.devEmail != null" >
+        dev_email = #{record.devEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devLocation != null" >
+        dev_location = #{record.devLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devSpeciality != null" >
+        dev_speciality = #{record.devSpeciality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devBack != null" >
+        dev_back = #{record.devBack,jdbcType=INTEGER},
+      </if>
+      <if test="record.devPraise != null" >
+        dev_praise = #{record.devPraise,jdbcType=INTEGER},
+      </if>
+      <if test="record.devRegistime != null" >
+        dev_registime = #{record.devRegistime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.devIdchange != null" >
+        dev_idchange = #{record.devIdchange,jdbcType=INTEGER},
+      </if>
+      <if test="record.devCancellation != null" >
+        dev_cancellation = #{record.devCancellation,jdbcType=INTEGER},
+      </if>
+      <if test="record.devCancellationtime != null" >
+        dev_cancellationtime = #{record.devCancellationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.devInfo != null" >
+        dev_info = #{record.devInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update developer
+    set dev_id = #{record.devId,jdbcType=VARCHAR},
+      dev_name = #{record.devName,jdbcType=VARCHAR},
+      dev_password = #{record.devPassword,jdbcType=VARCHAR},
+      dev_passwordmd5 = #{record.devPasswordmd5,jdbcType=VARCHAR},
+      dev_number = #{record.devNumber,jdbcType=CHAR},
+      dev_school = #{record.devSchool,jdbcType=VARCHAR},
+      dev_truename = #{record.devTruename,jdbcType=VARCHAR},
+      dev_idcard = #{record.devIdcard,jdbcType=VARCHAR},
+      dev_true = #{record.devTrue,jdbcType=INTEGER},
+      dev_img = #{record.devImg,jdbcType=VARCHAR},
+      dev_phone = #{record.devPhone,jdbcType=CHAR},
+      dev_email = #{record.devEmail,jdbcType=VARCHAR},
+      dev_location = #{record.devLocation,jdbcType=VARCHAR},
+      dev_speciality = #{record.devSpeciality,jdbcType=VARCHAR},
+      dev_back = #{record.devBack,jdbcType=INTEGER},
+      dev_praise = #{record.devPraise,jdbcType=INTEGER},
+      dev_registime = #{record.devRegistime,jdbcType=TIMESTAMP},
+      dev_idchange = #{record.devIdchange,jdbcType=INTEGER},
+      dev_cancellation = #{record.devCancellation,jdbcType=INTEGER},
+      dev_cancellationtime = #{record.devCancellationtime,jdbcType=TIMESTAMP},
+      dev_info = #{record.devInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update developer
+    set dev_id = #{record.devId,jdbcType=VARCHAR},
+      dev_name = #{record.devName,jdbcType=VARCHAR},
+      dev_password = #{record.devPassword,jdbcType=VARCHAR},
+      dev_passwordmd5 = #{record.devPasswordmd5,jdbcType=VARCHAR},
+      dev_number = #{record.devNumber,jdbcType=CHAR},
+      dev_school = #{record.devSchool,jdbcType=VARCHAR},
+      dev_truename = #{record.devTruename,jdbcType=VARCHAR},
+      dev_idcard = #{record.devIdcard,jdbcType=VARCHAR},
+      dev_true = #{record.devTrue,jdbcType=INTEGER},
+      dev_img = #{record.devImg,jdbcType=VARCHAR},
+      dev_phone = #{record.devPhone,jdbcType=CHAR},
+      dev_email = #{record.devEmail,jdbcType=VARCHAR},
+      dev_location = #{record.devLocation,jdbcType=VARCHAR},
+      dev_speciality = #{record.devSpeciality,jdbcType=VARCHAR},
+      dev_back = #{record.devBack,jdbcType=INTEGER},
+      dev_praise = #{record.devPraise,jdbcType=INTEGER},
+      dev_registime = #{record.devRegistime,jdbcType=TIMESTAMP},
+      dev_idchange = #{record.devIdchange,jdbcType=INTEGER},
+      dev_cancellation = #{record.devCancellation,jdbcType=INTEGER},
+      dev_cancellationtime = #{record.devCancellationtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdpi.maker.pojo.Developer" >
+    update developer
+    <set >
+      <if test="devName != null" >
+        dev_name = #{devName,jdbcType=VARCHAR},
+      </if>
+      <if test="devPassword != null" >
+        dev_password = #{devPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="devPasswordmd5 != null" >
+        dev_passwordmd5 = #{devPasswordmd5,jdbcType=VARCHAR},
+      </if>
+      <if test="devNumber != null" >
+        dev_number = #{devNumber,jdbcType=CHAR},
+      </if>
+      <if test="devSchool != null" >
+        dev_school = #{devSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="devTruename != null" >
+        dev_truename = #{devTruename,jdbcType=VARCHAR},
+      </if>
+      <if test="devIdcard != null" >
+        dev_idcard = #{devIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="devTrue != null" >
+        dev_true = #{devTrue,jdbcType=INTEGER},
+      </if>
+      <if test="devImg != null" >
+        dev_img = #{devImg,jdbcType=VARCHAR},
+      </if>
+      <if test="devPhone != null" >
+        dev_phone = #{devPhone,jdbcType=CHAR},
+      </if>
+      <if test="devEmail != null" >
+        dev_email = #{devEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="devLocation != null" >
+        dev_location = #{devLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="devSpeciality != null" >
+        dev_speciality = #{devSpeciality,jdbcType=VARCHAR},
+      </if>
+      <if test="devBack != null" >
+        dev_back = #{devBack,jdbcType=INTEGER},
+      </if>
+      <if test="devPraise != null" >
+        dev_praise = #{devPraise,jdbcType=INTEGER},
+      </if>
+      <if test="devRegistime != null" >
+        dev_registime = #{devRegistime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devIdchange != null" >
+        dev_idchange = #{devIdchange,jdbcType=INTEGER},
+      </if>
+      <if test="devCancellation != null" >
+        dev_cancellation = #{devCancellation,jdbcType=INTEGER},
+      </if>
+      <if test="devCancellationtime != null" >
+        dev_cancellationtime = #{devCancellationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devInfo != null" >
+        dev_info = #{devInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where dev_id = #{devId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gdpi.maker.pojo.Developer" >
+    update developer
+    set dev_name = #{devName,jdbcType=VARCHAR},
+      dev_password = #{devPassword,jdbcType=VARCHAR},
+      dev_passwordmd5 = #{devPasswordmd5,jdbcType=VARCHAR},
+      dev_number = #{devNumber,jdbcType=CHAR},
+      dev_school = #{devSchool,jdbcType=VARCHAR},
+      dev_truename = #{devTruename,jdbcType=VARCHAR},
+      dev_idcard = #{devIdcard,jdbcType=VARCHAR},
+      dev_true = #{devTrue,jdbcType=INTEGER},
+      dev_img = #{devImg,jdbcType=VARCHAR},
+      dev_phone = #{devPhone,jdbcType=CHAR},
+      dev_email = #{devEmail,jdbcType=VARCHAR},
+      dev_location = #{devLocation,jdbcType=VARCHAR},
+      dev_speciality = #{devSpeciality,jdbcType=VARCHAR},
+      dev_back = #{devBack,jdbcType=INTEGER},
+      dev_praise = #{devPraise,jdbcType=INTEGER},
+      dev_registime = #{devRegistime,jdbcType=TIMESTAMP},
+      dev_idchange = #{devIdchange,jdbcType=INTEGER},
+      dev_cancellation = #{devCancellation,jdbcType=INTEGER},
+      dev_cancellationtime = #{devCancellationtime,jdbcType=TIMESTAMP},
+      dev_info = #{devInfo,jdbcType=LONGVARCHAR}
+    where dev_id = #{devId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdpi.maker.pojo.Developer" >
+    update developer
+    set dev_name = #{devName,jdbcType=VARCHAR},
+      dev_password = #{devPassword,jdbcType=VARCHAR},
+      dev_passwordmd5 = #{devPasswordmd5,jdbcType=VARCHAR},
+      dev_number = #{devNumber,jdbcType=CHAR},
+      dev_school = #{devSchool,jdbcType=VARCHAR},
+      dev_truename = #{devTruename,jdbcType=VARCHAR},
+      dev_idcard = #{devIdcard,jdbcType=VARCHAR},
+      dev_true = #{devTrue,jdbcType=INTEGER},
+      dev_img = #{devImg,jdbcType=VARCHAR},
+      dev_phone = #{devPhone,jdbcType=CHAR},
+      dev_email = #{devEmail,jdbcType=VARCHAR},
+      dev_location = #{devLocation,jdbcType=VARCHAR},
+      dev_speciality = #{devSpeciality,jdbcType=VARCHAR},
+      dev_back = #{devBack,jdbcType=INTEGER},
+      dev_praise = #{devPraise,jdbcType=INTEGER},
+      dev_registime = #{devRegistime,jdbcType=TIMESTAMP},
+      dev_idchange = #{devIdchange,jdbcType=INTEGER},
+      dev_cancellation = #{devCancellation,jdbcType=INTEGER},
+      dev_cancellationtime = #{devCancellationtime,jdbcType=TIMESTAMP}
+    where dev_id = #{devId,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- <<<<<<<<<<<<<<<<<< 自己添加的 >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+  <select id="selectOneDeveloper" resultMap="ResultMapWithBLOBs" parameterType="com.gdpi.maker.pojo.Developer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from developer
+	where 1=1
+	  <if test="record.devId != null" >
+        and dev_id = #{record.devId,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devName != null" >
+        and dev_name = #{record.devName,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devPassword != null" >
+        and dev_password = #{record.devPassword,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devPasswordmd5 != null" >
+        and dev_passwordmd5 = #{record.devPasswordmd5,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devNumber != null" >
+        and dev_number = #{record.devNumber,jdbcType=CHAR}
+      </if>
+      <if test="record.devSchool != null" >
+        and dev_school = #{record.devSchool,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devTruename != null" >
+        and dev_truename = #{record.devTruename,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devIdcard != null" >
+        and dev_idcard = #{record.devIdcard,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devTrue != null" >
+        and dev_true = #{record.devTrue,jdbcType=INTEGER}
+      </if>
+      <if test="record.devImg != null" >
+        and dev_img = #{record.devImg,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devPhone != null" >
+        and dev_phone = #{record.devPhone,jdbcType=CHAR}
+      </if>
+      <if test="record.devEmail != null" >
+        and dev_email = #{record.devEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devLocation != null" >
+        and dev_location = #{record.devLocation,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devSpeciality != null" >
+        and dev_speciality = #{record.devSpeciality,jdbcType=VARCHAR}
+      </if>
+      <if test="record.devBack != null" >
+        and dev_back = #{record.devBack,jdbcType=INTEGER}
+      </if>
+      <if test="record.devPraise != null" >
+        and dev_praise = #{record.devPraise,jdbcType=INTEGER}
+      </if>
+      <if test="record.devRegistime != null" >
+        and dev_registime = #{record.devRegistime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="record.devIdchange != null" >
+        and dev_idchange = #{record.devIdchange,jdbcType=INTEGER}
+      </if>
+      <if test="record.devCancellation != null" >
+        and dev_cancellation = #{record.devCancellation,jdbcType=INTEGER}
+      </if>
+      <if test="record.devCancellationtime != null" >
+        and dev_cancellationtime = #{record.devCancellationtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="record.devInfo != null" >
+        and dev_info = #{record.devInfo,jdbcType=LONGVARCHAR}
+      </if>
+  </select>
+  
+  <select id="selectDevByIdExist" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from developer
+    where 
+    	dev_id = #{devId,jdbcType=VARCHAR}
+    	and
+    	dev_cancellation = 0
+  </select>
+</mapper>
